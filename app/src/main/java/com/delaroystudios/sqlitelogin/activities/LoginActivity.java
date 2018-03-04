@@ -30,8 +30,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private AppCompatButton appCompatButtonLogin;
 
     private AppCompatTextView textViewLinkRegister;
+    private AppCompatTextView textViewLinkForgotPassword;
 
-    private InputValidation inputValidation;
+     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
 
     @Override
@@ -56,11 +57,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         appCompatButtonLogin = (AppCompatButton) findViewById(R.id.appCompatButtonLogin);
 
         textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
+        textViewLinkForgotPassword = (AppCompatTextView) findViewById(R.id.forgotPassword);
     }
 
     private void initListeners(){
         appCompatButtonLogin.setOnClickListener(this);
         textViewLinkRegister.setOnClickListener(this);
+        textViewLinkForgotPassword.setOnClickListener(this);
     }
 
     private void initObjects(){
@@ -77,6 +80,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.textViewLinkRegister:
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intentRegister);
+                break;
+            case R.id.forgotPassword:
+                Intent intent = new Intent(getApplicationContext(), ForgotPassword.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -98,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
             startActivity(accountsIntent);
+            finish();
         } else {
             Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
         }

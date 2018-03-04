@@ -21,6 +21,12 @@
 
         <activity android:name=".activities.UsersActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".activities.ForgotPassword"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".activities.ConfirmPassword"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

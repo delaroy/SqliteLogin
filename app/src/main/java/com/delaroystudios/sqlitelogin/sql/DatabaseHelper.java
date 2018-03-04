@@ -56,6 +56,14 @@ public class DatabaseHelper  extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void updatePassword(String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_PASSWORD, password);
+        db.update(TABLE_USER, values, COLUMN_USER_EMAIL+" = ?",new String[] { email });
+        db.close();
+    }
+
     public boolean checkUser(String email){
         String[] columns = {
                 COLUMN_USER_ID
