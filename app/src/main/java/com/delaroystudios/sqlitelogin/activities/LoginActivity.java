@@ -14,6 +14,7 @@ import android.view.View;
 import com.delaroystudios.sqlitelogin.R;
 import com.delaroystudios.sqlitelogin.helper.InputValidation;
 import com.delaroystudios.sqlitelogin.sql.DatabaseHelper;
+import com.delaroystudios.sqlitelogin.utils.PreferenceUtils;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -58,6 +59,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
         textViewLinkForgotPassword = (AppCompatTextView) findViewById(R.id.forgotPassword);
+
+        if (PreferenceUtils.getEmail(this) != null || !PreferenceUtils.getEmail(this).equals("")){
+            Intent intent = new Intent(LoginActivity.this, UsersActivity.class);
+            startActivity(intent);
+        }else{
+
+        }
     }
 
     private void initListeners(){
@@ -98,9 +106,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
             return;
         }
+        String email = textInputEditTextEmail.getText().toString().trim();
+        String password = textInputEditTextPassword.getText().toString().trim();
 
-        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {
+        if (databaseHelper.checkUser(email, password)) {
+            PreferenceUtils.saveEmail(email, this);
+            PreferenceUtils.savePassword(password, this);
             Intent accountsIntent = new Intent(activity, UsersActivity.class);
             accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
