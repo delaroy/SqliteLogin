@@ -59,8 +59,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
         textViewLinkForgotPassword = (AppCompatTextView) findViewById(R.id.forgotPassword);
+        PreferenceUtils utils = new PreferenceUtils();
 
-        if (PreferenceUtils.getEmail(this) != null || !PreferenceUtils.getEmail(this).equals("")){
+        if (utils.getEmail(this) != null ){
             Intent intent = new Intent(LoginActivity.this, UsersActivity.class);
             startActivity(intent);
         }else{

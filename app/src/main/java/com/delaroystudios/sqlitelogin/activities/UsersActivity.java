@@ -47,8 +47,8 @@ public class UsersActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.log_out:
-                PreferenceUtils.savePassword("", this);
-                PreferenceUtils.saveEmail("", this);
+                PreferenceUtils.savePassword(null, this);
+                PreferenceUtils.saveEmail(null, this);
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
